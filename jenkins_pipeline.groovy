@@ -53,7 +53,7 @@ pipeline
 					{
 						script
 						{
-							bat label:'', script: 'az deployment group create -g ' + params.resourcegroup + ' --template-file ./accountstorage.bicep  --parameters ./accountstorage.parameters.json'
+							bat label:'', script: 'az deployment group create -g ' + params.resourceGroupName + ' --template-file ./accountstorage.bicep  --parameters ./accountstorage.parameters.json'
 						}
 					}
 				}
