@@ -5,8 +5,8 @@ pipeline
 
 		parameters
 		{
-				string(name: 'resourceGroupName', default: '-rg')
-				string(name: 'resourceGroupLocation',default: 'centralus')
+				string(name: 'resourceGroupName', defaultValue: '-rg')
+				string(name: 'resourceGroupLocation', defaultValue: 'centralus')
 		}
 
     environment
@@ -53,7 +53,7 @@ pipeline
 					{
 						script
 						{
-							bat label:'', script: 'az deployment group create -g ' params.resourcegroup + ' --template-file ./accountstorage.bicep  --parameters ./accountstorage.parameters.json'
+							bat label:'', script: 'az deployment group create -g ' + params.resourcegroup + ' --template-file ./accountstorage.bicep  --parameters ./accountstorage.parameters.json'
 						}
 					}
 				}
