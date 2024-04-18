@@ -1,0 +1,5 @@
+* Create a new Azure Resource Manager (ARM) deployment at the subscription scope:
+az deployment sub create --name varelaRGDeployment --location centralus --template-file C:\Users\marcovarela\Desktop\bicep examples\resourcegroup.bicep --parameters resourceGroupName=varela-rg resourceGroupLocation=centralus
+
+* Create a storage account:
+az deployment group create -g varela-rg --template-file C:\Users\marcovarela\Desktop\bicep examples\accountstorage.bicep  --parameters C:\Users\marcovarela\Desktop\bicep examples\accountstorage.parameters.json
