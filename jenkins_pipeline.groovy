@@ -3,6 +3,12 @@ pipeline
     agent any
     // agent { label: 'Windows' }
 
+		parameters
+		{
+				string(name: 'resourceGroupName', default: '-rg')
+				string(name: 'resourceGroupLocation',default: 'centralus')
+		}
+
     environment
     {
 				// Don't do this!!
@@ -37,23 +43,19 @@ pipeline
             {
                 script
                 {
-                    properties([
-
-                        parameters([
-                            stringParam(
-                                name: 'resourceGroupName',
-                                default: '-rg'
-                                ),
-                            stringParam(
-                                name: 'resourceGroupLocation',
-                                default: 'centralus'
-                                )
-                        ])
-                    ])
-
                     bat label: '', script: 'az deployment sub create --name RGDeployment --location centralus --template-file ./resourcegroup.bicep --parameters resourceGroupName=' + params.resourceGroupName + ' resourceGroupLocation=' + params.resourceGroupLocation
                 }
             }
         }
+				stage('Create Storage Account')
+				{
+					steps
+					{
+						script
+						{
+							bat label:'', script: 'az deployment group create -g ' params.resourcegroup + ' --template-file ./accountstorage.bicep  --parameters ./accountstorage.parameters.json'
+						}
+					}
+				}
     }
 }
